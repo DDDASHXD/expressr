@@ -1,4 +1,5 @@
 # Expressr 🛜
+![Expressr banner](https://utfs.io/f/EVQsPnqldSbJqlVC1rxoGhcxXdUFRS31zEsviQOVWb8NLj5n)
 
 A light typescript based, easy to use, express server with dynamic folder routing.
 
