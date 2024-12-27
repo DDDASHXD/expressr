@@ -1,6 +1,6 @@
 {
   "name": "expressr-app",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Express server with dynamic folder routing",
   "main": "dist/index.js",
   "scripts": {
