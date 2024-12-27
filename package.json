@@ -1,13 +1,32 @@
 {
-  "name": "expressr",
-  "version": "1.0.0",
-  "description": "Express server with dynamic folder routing",
-  "main": "dist/index.js",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+  "name": "create-expressr-app",
+  "version": "1.0.2",
+  "description": "Create Express apps with dynamic folder routing",
+  "main": "bin/create-expressr-app.js",
+  "bin": {
+    "create-expressr-app": "./bin/create-expressr-app.js"
   },
+  "files": [
+    "bin/",
+    "templates/",
+    "templates/src/",
+    "templates/src/routes/",
+    "templates/src/routes/examples/",
+    "templates/src/routes/(api)/",
+    "templates/src/utils/"
+  ],
+  "scripts": {
+    "prepublishOnly": "chmod +x bin/create-expressr-app.js"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "routing",
+    "create-app",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2"
   },
