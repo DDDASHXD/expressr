@@ -1,6 +1,3 @@
-# Expressr 🛜
-![Expressr banner](https://utfs.io/f/EVQsPnqldSbJK0rIZaRLG29qk3hfuBvgnlarzoedXV0MI6xY)
-
 ![Expressr banner](https://utfs.io/f/EVQsPnqldSbJK0rIZaRLG29qk3hfuBvgnlarzoedXV0MI6xY)
 
 A light typescript based, easy to use, express server with dynamic folder routing.
@@ -9,11 +6,18 @@ A light typescript based, easy to use, express server with dynamic folder routin
 
 Expressr is a template for NPM, that allows you to easily setup a very basic express server, with dynamic folder routing as you might see in Next.js.
 
-### Installation instructions
+## Installation instructions
 
-_coming soon_
+Installation is extremely easy. Simply run the following command in your terminal in the directory you want to create the project:
 
-### Usage
+```sh
+npx create-expressr-app my-app
+```
+
+This will create the basic files, structure and setup typescript.
+You can now run `npm run dev`to run the api in dev mode.
+
+## Usage
 
 Expressr is extremely easy to use. After you've setup the template locally, you can enter `npm run dev` to run it dev mode. You should then be able to run either Postman Insomnia, or your preferred api program, and route to localhost:{port}/status and get the example route.
 
