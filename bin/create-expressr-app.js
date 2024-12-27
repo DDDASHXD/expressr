@@ -45,7 +45,9 @@ async function main() {
     }
 
     // Create project directory
-    console.log(`Creating a new Express.js app in ${projectPath}`);
+    console.log(`Creating a new ✨Expressr✨ app in ${projectPath}`);
+    console.log('Thank you for using expressr!');
+    console.log('Please support me by checking my website ❤️ https://skxv.dev');
     fs.mkdirSync(projectPath, { recursive: true });
 
     // Create project structure
