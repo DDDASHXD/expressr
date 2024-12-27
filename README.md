@@ -15,11 +15,11 @@ npx create-expressr-app my-app
 ```
 
 This will create the basic files, structure and setup typescript.
-You can now run `npm run dev`to run the api in dev mode.
+You can now run `npm run dev` to run the api in dev mode.
 
 ## Usage
 
-Expressr is extremely easy to use. After you've setup the template locally, you can enter `npm run dev` to run it dev mode. You should then be able to run either Postman Insomnia, or your preferred api program, and route to localhost:{port}/status and get the example route.
+Expressr is extremely easy to use. After you've setup the template locally, you can enter `npm run dev` to run it dev mode. You should then be able to run either Postman, Insomnia, or your preferred api program, and route to localhost:{port}/status and get the example route.
 
 #### Basic route
 
@@ -46,11 +46,11 @@ export function post(req: Request, res: Response) {
 }
 ```
 
-You should now be able to route to `localhost:{port}/new-route.ts`
+You should now be able to route to `localhost:{port}/new-route`
 
 #### Structure-only folders
 
-You can put perenthesis around a folder name, and it'll be ignored by the router. You can use this to group things together in your editor to make development easier, but remove the structure from the api route.
+You can put parentheses around a folder name, and it'll be ignored by the router. You can use this to group things together in your editor to make development easier, but remove the structure from the api route.
 
 Let's create some auth routes. I'll create `login.ts`, `register.ts` and `user.ts`:
 
@@ -67,7 +67,7 @@ In this case, you just route to `localhost:{port}/login` and the `(auth)` folder
 
 #### Params
 
-Like with the perenthesis folders, you can wrap your file name in brackets to get a param. I'll create a new folder file called `test/[test].ts`. In this case the param varable will be called test. Here's the folder structure:
+Like with the parentheses folders, you can wrap your file name in brackets to get a param. I'll create a new folder file called `test/[test].ts`. In this case the param variable will be called test. Here's the folder structure:
 
 ```
 routes/
