@@ -1,7 +1,7 @@
 {
   "name": "expressr-app",
-  "version": "1.0.6",
-  "description": "Express server with dynamic folder routing",
+  "version": "1.0.0",
+  "description": "Express app with dynamic folder routing",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",

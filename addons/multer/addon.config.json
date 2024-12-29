@@ -1,0 +1,42 @@
+{
+  "name": "multer",
+  "description": "Adds file upload support to your Expressr app",
+  "dependencies": {
+    "multer": "^1.4.5-lts.1"
+  },
+  "fileChanges": [
+    {
+      "path": "src/utils/routeLoader.ts",
+      "line": 4,
+      "content": "import { upload } from './multerConfig';\n",
+      "type": "insert"
+    },
+    {
+      "path": "src/utils/routeLoader.ts",
+      "line": 11,
+      "content": "  post?: RequestHandler | { handler: RequestHandler; upload?: boolean };",
+      "type": "replace"
+    },
+    {
+      "path": "src/utils/routeLoader.ts",
+      "line": 36,
+      "content": "      // Special handling for POST with optional file upload\n      if (routeModule.post) {\n        if (typeof routeModule.post === \"function\") {\n          router.post(`/${routePath}`, routeModule.post);\n        } else {\n          const { handler, upload: useUpload } = routeModule.post;\n          if (useUpload) {\n            router.post(`/${routePath}`, upload.single(\"file\"), handler);\n          } else {\n            router.post(`/${routePath}`, handler);\n          }\n        }\n      }",
+      "type": "replace"
+    }
+  ],
+  "newFolders": [
+    {
+      "path": "src/uploads"
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "src/routes/upload.ts",
+      "content": "import { Request, Response } from \"express\";\n\nexport const post = {\n  handler: (req: Request, res: Response) => {\n    const file = req.file;\n    if (!file) {\n      return res.status(400).json({ error: \"No file uploaded\" });\n    }\n\n    res.json({\n      message: \"File uploaded successfully\",\n      filename: file.filename,\n      path: file.path\n    });\n  },\n  upload: true // This enables multer for this route\n};\n"
+    },
+    {
+      "path": "src/utils/multerConfig.ts",
+      "content": "import multer from \"multer\";\nimport path from \"path\";\nimport { Request } from \"express\";\n\n// Configure multer storage\nconst storage = multer.diskStorage({\n  destination: (req: Request, file: Express.Multer.File, cb) => {\n    cb(null, path.join(__dirname, \"..\", \"uploads\"));\n  },\n  filename: (req: Request, file: Express.Multer.File, cb) => {\n    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;\n    cb(\n      null,\n      `${file.fieldname}-${uniqueSuffix}${path.extname(file.originalname)}`\n    );\n  }\n});\n\n// Create multer instance with configuration\nconst upload = multer({ storage });\n\nexport { upload };"
+    }
+  ]
+}

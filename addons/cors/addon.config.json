@@ -1,0 +1,19 @@
+{
+  "name": "cors",
+  "description": "Adds CORS support to your Expressr app",
+  "dependencies": {
+    "cors": "^2.8.5"
+  },
+  "fileChanges": [
+    {
+      "path": "src/index.ts",
+      "line": 4,
+      "content": "import cors from 'cors';\n"
+    },
+    {
+      "path": "src/index.ts",
+      "line": 11,
+      "content": "app.use(cors());\n"
+    }
+  ]
+}
