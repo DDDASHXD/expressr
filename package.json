@@ -12,9 +12,10 @@
     "addons/"
   ],
   "scripts": {
-    "prepublishOnly": "node build.js -r && chmod +x bin/create-expressr-app.js",
-    "build": "node build.js",
-    "rebuild": "node build.js -r"
+    "prepublishOnly": "npm run rebuild:templates && npm run build:installer && chmod +x bin/create-expressr-app.js",
+    "build:templates": "node build.js",
+    "rebuild:templates": "node build.js -r",
+    "build:installer": "tsup"
   },
   "keywords": [
     "express",
@@ -28,7 +29,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "fs-extra": "^11.2.0",
-    "prompt": "^1.3.0"
+    "prompt": "^1.3.0",
+    "tsup": "^8.3.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

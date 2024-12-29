@@ -6,6 +6,15 @@ export interface IAddon {
 	fileChanges: Array<{
 		path: string;
 		line: number;
+		type: string;
+		content: string;
+	}>;
+
+	newFolders: Array<{
+		path: string;
+	}>;
+	newFiles: Array<{
+		path: string;
 		content: string;
 	}>;
 }

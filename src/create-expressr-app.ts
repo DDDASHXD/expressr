@@ -13,7 +13,7 @@ prompt.colors = true;
 
 // Function to load available addons
 const loadAddons = async () => {
-	const addonsDir = path.join(__dirname, "../addons");
+	const addonsDir = path.join(__dirname, "./addons");
 	const addons: IAddon[] = [];
 
 	const addonsDirExists = await fs.exists(addonsDir);
@@ -37,7 +37,7 @@ const loadAddons = async () => {
 };
 
 // Function to apply addon changes
-async function applyAddon(projectPath, addon) {
+async function applyAddon(projectPath: string, addon: IAddon) {
 	// Add dependencies to package.json
 	const packagePath = path.join(projectPath, "package.json");
 	let packageJson = JSON.parse(fs.readFileSync(packagePath, "utf8"));
@@ -165,7 +165,7 @@ async function askAddons(addons: IAddon[]) {
 }
 
 // Function to copy template files recursively
-function copyTemplateFiles(source, target) {
+function copyTemplateFiles(source: string, target: string) {
 	// Create target directory if it doesn't exist
 	fs.mkdirSync(target, { recursive: true });
 
@@ -223,7 +223,7 @@ async function main() {
 		const selectedAddons = await askAddons(await loadAddons());
 
 		const projectPath = path.join(process.cwd(), projectName);
-		const templateDir = path.join(__dirname, "../templates");
+		const templateDir = path.join(__dirname, "./templates");
 
 		// Create project directory
 		console.log(`\n✨ Creating a new Expressr app in ${projectPath}`);
@@ -255,7 +255,7 @@ async function main() {
 			try {
 				await fs.copyFile(sourcePath, targetPath);
 			} catch (err) {
-				throw new Error(`Error copying file ${file}: ${err.message}`);
+				throw new Error(`Error copying file ${file}: ${(err as unknown as any).message}`);
 			}
 		}
 
@@ -301,7 +301,7 @@ async function main() {
 			process.chdir(projectPath);
 			execSync("npm install", { stdio: "inherit" });
 		} catch (err) {
-			throw new Error(`Error installing dependencies: ${err.message}`);
+			throw new Error(`Error installing dependencies: ${(err as unknown as any).message}`);
 		}
 
 		console.log(`
@@ -326,7 +326,7 @@ Thank you for using expressr!
 Please support me by checking my website ❤️  https://skxv.dev
 `);
 	} catch (err) {
-		console.error("❌ Error:", err.message);
+		console.error("❌ Error:", (err as unknown as any).message);
 		process.exit(1);
 	}
 }
