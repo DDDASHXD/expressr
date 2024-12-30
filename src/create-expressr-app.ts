@@ -11,6 +11,23 @@ prompt.message = "";
 prompt.delimiter = "";
 prompt.colors = true;
 
+const createPrompt = (schema: prompt.Schema, propertyName: string) => {
+	return new Promise<string>((resolve, reject) => {
+		prompt.get(schema, (err, result) => {
+			if (err) {
+				reject(err);
+			} else {
+				const property = result[propertyName];
+				if (typeof property !== "string") {
+					resolve(result[propertyName]?.toString() || "");
+				} else {
+					resolve(result[propertyName] as string);
+				}
+			}
+		});
+	});
+};
+
 // Function to load available addons
 const loadAddons = async () => {
 	const addonsDir = path.join(__dirname, "./addons");
@@ -84,7 +101,7 @@ async function applyAddon(projectPath: string, addon: IAddon) {
 		switch (change.type || "insert") {
 			case "replace":
 				// Replace the line at the specified position
-				lines[change.line - 1] = change.content;
+				lines[change.line] = change.content;
 				break;
 			case "insert":
 			default:
@@ -122,8 +139,8 @@ async function askProjectName() {
 		}
 	};
 
-	const result = await prompt.get(schema);
-	return (result.name as string) || "";
+	const name = await createPrompt(schema, "name");
+	return (name as string) || "";
 }
 
 // Function to prompt for addon selection
@@ -148,14 +165,13 @@ async function askAddons(addons: IAddon[]) {
 		}
 	};
 
-	const result = await prompt.get(schema);
+	const selected = await createPrompt(schema, "selected");
 
-	if (!result.selected) {
+	if (!selected) {
 		return [];
 	}
 
-	const selectedIndices = result.selected
-		.toString()
+	const selectedIndices = selected
 		.split(",")
 		.map(n => parseInt(n.trim()))
 		.filter(n => !isNaN(n) && n > 0 && n <= addons.length)
@@ -202,8 +218,8 @@ async function askPort() {
 		}
 	};
 
-	const result = await prompt.get(schema);
-	return Number(result.port) || 3000;
+	const port = await createPrompt(schema, "port");
+	return Number(port) || 3000;
 }
 
 async function main() {
@@ -315,7 +331,7 @@ Inside that directory, you can run several commands:
     Builds the app for production.
 
   npm start
-    Runs the built app in production mode.
+    Runs the built app in production mode. (You must first run 'npm run build')
 
 Get started by typing:
 
